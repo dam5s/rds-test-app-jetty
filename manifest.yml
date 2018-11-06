@@ -1,0 +1,11 @@
+---
+applications:
+- name: rds-test-app-jetty
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git#v4.15
+  memory: 512M
+  path: build/libs/rds-test-app-jetty.jar
+  instances: 1
+  env:
+    JBP_CONFIG_OPEN_JDK_JRE: '{jre: {version: 10.0.2_+}, memory_calculator: {stack_threads: 50}}'
+    JBP_CONFIG_CONTAINER_SECURITY_PROVIDER: '{key_manager_enabled: false, trust_manager_enabled: false}'
+    JAVA_OPTS: -Djavax.net.ssl.trustStore=/home/vcap/app/cacerts -Djavax.net.ssl.trustStorePassword=changeme -Djavax.net.ssl.trustStoreType=JKS
